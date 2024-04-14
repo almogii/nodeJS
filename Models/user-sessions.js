@@ -16,6 +16,7 @@ const Session= db.define('user-sessions', {
     userId: Sequelize.STRING,
     expire: Sequelize.DATE,
     data: Sequelize.TEXT,
-  });
+    
+  },{timestamps:false});
 
   module.exports=Session
