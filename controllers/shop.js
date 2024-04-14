@@ -3,11 +3,11 @@ const Cart = require('../models/cart');
 
 exports.getProducts = (req, res, next) => {
   Product.findAll().then((rows)=>{
-   
     res.render('shop/product-list', {
       prods:rows,
       pageTitle: 'All Products',
-      path: '/products'
+      path: '/products',
+       isAuthenticated: req.session.isLoggedIn
     });
   })
   .catch(err=>console.log(err))
@@ -24,7 +24,8 @@ exports.getProduct = (req, res, next) => {
     res.render('shop/product-detail', {
       product:result[0],
       pageTitle: 'Shop',
-      path: '/product-detail'
+      path: '/product-detail',
+      isAuthenticated: req.session.isLoggedIn
     })
   }).catch(err=>{console.log(err)})
 }
@@ -35,7 +36,8 @@ exports.getIndex = (req, res, next) => {
     res.render('shop/index', {
       prods:rows,
       pageTitle: 'Shop',
-      path: '/'
+      path: '/',
+      isAuthenticated: req.session.isLoggedIn
     })
   }).catch(err=>console.log(err))
  
@@ -49,7 +51,8 @@ exports.getCart = (req, res, next) => {
       res.render('shop/cart', {
               path: '/cart',
                pageTitle: 'Your Cart',
-              products: products
+              products: products,
+              isAuthenticated: req.session.isLoggedIn
             });
     }).catch(err=>{console.log(err);})})
 
